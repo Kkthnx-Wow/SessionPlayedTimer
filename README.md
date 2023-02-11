@@ -1,4 +1,4 @@
-# SessionPlayerTimer   
+# SessionPlayedTimer   
 ![image](https://user-images.githubusercontent.com/40672673/218270371-f88b77a7-7706-49ff-aaf5-7ab099dcbe23.png)
 
 /sptimer to show and hide the timer
