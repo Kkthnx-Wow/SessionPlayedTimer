@@ -70,11 +70,16 @@ timerFrame:SetScript("OnEvent", function(self, event)
 					local currentTime = GetTime()
 					local elapsedTime = currentTime - self.startTime
 					SessionPlayedTimerDB.elapsedTime = elapsedTime
-					local minutes = math.floor(elapsedTime / 60)
-					local seconds = math.floor(elapsedTime - minutes * 60)
+					local hours = math.floor(elapsedTime / 3600)
+					local minutes = math.floor((elapsedTime - hours * 3600) / 60)
+					local seconds = math.floor(elapsedTime - hours * 3600 - minutes * 60)
 
 					-- Set the text to display the timer
-					timeLabel:SetText(string.format("%02d:%02d", minutes, seconds))
+					if hours > 0 then
+						timeLabel:SetText(string.format("%dh %02dm %02ds", hours, minutes, seconds))
+					else
+						timeLabel:SetText(string.format("%02dm %02ds", minutes, seconds))
+					end
 				end)
 			end
 		end)
@@ -88,6 +93,7 @@ end)
 -- Make the timer frame moveable
 timerFrame:SetMovable(true)
 timerFrame:EnableMouse(true)
+timerFrame:SetClampedToScreen(true)
 timerFrame:RegisterForDrag("LeftButton")
 timerFrame:SetScript("OnDragStart", timerFrame.StartMoving)
 timerFrame:SetScript("OnDragStop", timerFrame.StopMovingOrSizing)
